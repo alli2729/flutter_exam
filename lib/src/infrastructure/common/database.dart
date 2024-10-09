@@ -13,6 +13,10 @@ class Database {
       ].obs,
     )
   ]);
+
+  static Map<String, String> userCred = {
+    'ali': 'git',
+  };
   // Constractor
 
   // Methods
