@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../infrastructure/common/database.dart';
 import '../../../infrastructure/routes/route_names.dart';
+import '../repositories/login_repository.dart';
 
 class LoginController extends GetxController {
+  final LoginRepository _repo = LoginRepository();
   final userController = TextEditingController();
   final passController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -13,20 +14,28 @@ class LoginController extends GetxController {
     return null;
   }
 
-  void onLogin() {
-    if (formKey.currentState?.validate() ?? false) {
-      if (Database.userCred[userController.text] == passController.text) {
+  Future<void> onLogin() async {
+    if (!(formKey.currentState?.validate() ?? false)) return;
+
+    final result = await _repo.login(userController.text, passController.text);
+    result?.fold(
+      (exception) {
+        _showSnackBar(exception);
+      },
+      (success) {
         Get.offNamed(RouteNames.catagory);
-      } else {
-        Get.showSnackbar(
-          GetSnackBar(
-            message: 'Username or Password is wrong',
-            backgroundColor: Colors.red.withOpacity(.5),
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      }
-    }
+      },
+    );
+  }
+
+  void _showSnackBar(String value) {
+    Get.showSnackbar(
+      GetSnackBar(
+        message: value,
+        backgroundColor: Colors.red.withOpacity(.5),
+        duration: const Duration(seconds: 2),
+      ),
+    );
   }
 
   void onRegister() async {
