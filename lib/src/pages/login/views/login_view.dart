@@ -8,16 +8,8 @@ class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _fab(),
       appBar: _appBar(),
       body: _body(),
-    );
-  }
-
-  Widget _fab() {
-    return FloatingActionButton(
-      onPressed: controller.onLogin,
-      child: const Icon(Icons.login),
     );
   }
 
@@ -33,17 +25,19 @@ class LoginView extends GetView<LoginController> {
             const SizedBox(height: 16),
             _password(),
             const SizedBox(height: 16),
+            Obx(() => _login()),
+            const SizedBox(height: 16),
             const Text('or', style: TextStyle(fontSize: 16)),
             const SizedBox(height: 16),
-            _register(),
+            Obx(() => _register()),
           ],
         ),
       ),
     );
   }
 
-  Widget _register() => InkWell(
-        onTap: controller.onRegister,
+  Widget _login() => InkWell(
+        onTap: (controller.isLoading.value) ? null : controller.onLogin,
         borderRadius: BorderRadius.circular(12),
         child: Container(
           alignment: Alignment.center,
@@ -51,15 +45,28 @@ class LoginView extends GetView<LoginController> {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: Colors.cyan,
+            color: (controller.isLoading.value) ? Colors.grey : Colors.cyan,
           ),
           child: const Text(
-            'REGISTER',
+            'LOGIN',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: Colors.white,
             ),
+          ),
+        ),
+      );
+
+  Widget _register() => InkWell(
+        onTap: (controller.isLoading.value) ? null : controller.onRegister,
+        borderRadius: BorderRadius.circular(12),
+        child: Text(
+          'REGISTER',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: (controller.isLoading.value) ? Colors.grey : Colors.blue,
           ),
         ),
       );

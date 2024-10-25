@@ -4,10 +4,12 @@ import '../../../infrastructure/routes/route_names.dart';
 import '../repositories/login_repository.dart';
 
 class LoginController extends GetxController {
-  final LoginRepository _repo = LoginRepository();
+  final LoginRepository _repository = LoginRepository();
   final userController = TextEditingController();
   final passController = TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  RxBool isLoading = false.obs;
 
   String? validate(String? value) {
     if (value != null && value.isEmpty) return 'required';
@@ -16,33 +18,64 @@ class LoginController extends GetxController {
 
   Future<void> onLogin() async {
     if (!(formKey.currentState?.validate() ?? false)) return;
+    isLoading.value = true;
 
-    final result = await _repo.login(userController.text, passController.text);
+    final result = await _repository.login(
+      name: userController.text,
+      password: passController.text,
+    );
+
     result?.fold(
       (exception) {
-        _showSnackBar(exception);
+        isLoading.value = false;
+        _showFailSnackBar(exception);
       },
       (success) {
+        isLoading.value = false;
         Get.offNamed(RouteNames.catagory);
       },
     );
   }
 
-  void _showSnackBar(String value) {
+  Future<void> onRegister() async {
+    final result = await Get.toNamed(RouteNames.register);
+    if (result != null) {
+      userController.text = result["name"];
+      passController.text = result["password"];
+      _showSuccessSnackBar('user successfully created');
+    }
+  }
+
+  void _showSuccessSnackBar(String message) {
     Get.showSnackbar(
       GetSnackBar(
-        message: value,
+        messageText: Text(
+          message,
+          style: const TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.green.withOpacity(.5),
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  void _showFailSnackBar(String message) {
+    Get.showSnackbar(
+      GetSnackBar(
+        messageText: Text(
+          message,
+          style: const TextStyle(color: Colors.black),
+        ),
         backgroundColor: Colors.red.withOpacity(.5),
         duration: const Duration(seconds: 2),
       ),
     );
   }
 
-  void onRegister() async {
-    final result = await Get.toNamed(RouteNames.register);
-    if (result != null) {
-      userController.text = result[0];
-      passController.text = result[1];
-    }
+  @override
+  void dispose() {
+    super.dispose();
+    passController.dispose();
+    userController.dispose();
   }
 }

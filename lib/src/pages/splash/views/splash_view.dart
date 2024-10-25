@@ -8,8 +8,15 @@ class SplashView extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     controller.wait();
-    return const Center(
-      child: CircularProgressIndicator(),
+    return const SizedBox(
+      height: double.infinity,
+      width: double.infinity,
+      child: ColoredBox(
+        color: Colors.white,
+        child: Center(
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }

@@ -8,16 +8,8 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _fab(),
       appBar: _appBar(),
       body: _body(),
-    );
-  }
-
-  Widget _fab() {
-    return FloatingActionButton(
-      onPressed: controller.onRegister,
-      child: const Icon(Icons.login),
     );
   }
 
@@ -35,17 +27,19 @@ class RegisterView extends GetView<RegisterController> {
             const SizedBox(height: 16),
             _repeatPassword(),
             const SizedBox(height: 16),
+            Obx(() => _register()),
+            const SizedBox(height: 16),
             const Text('or', style: TextStyle(fontSize: 16)),
             const SizedBox(height: 16),
-            _login(),
+            Obx(() => _login()),
           ],
         ),
       ),
     );
   }
 
-  Widget _login() => InkWell(
-        onTap: controller.onLogin,
+  Widget _register() => InkWell(
+        onTap: (controller.isLoading.value) ? null : controller.onRegister,
         borderRadius: BorderRadius.circular(12),
         child: Container(
           alignment: Alignment.center,
@@ -53,15 +47,28 @@ class RegisterView extends GetView<RegisterController> {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            color: Colors.cyan,
+            color: (controller.isLoading.value) ? Colors.grey : Colors.cyan,
           ),
           child: const Text(
-            'LOGIN',
+            'REGISTER',
             style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: Colors.white,
             ),
+          ),
+        ),
+      );
+
+  Widget _login() => InkWell(
+        onTap: (controller.isLoading.value) ? null : controller.onLogin,
+        borderRadius: BorderRadius.circular(12),
+        child: Text(
+          'LOGIN',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: (controller.isLoading.value) ? Colors.grey : Colors.blue,
           ),
         ),
       );
@@ -109,6 +116,7 @@ class RegisterView extends GetView<RegisterController> {
 
   AppBar _appBar() {
     return AppBar(
+      automaticallyImplyLeading: false,
       title: const Text('REGISTER'),
       centerTitle: true,
     );
