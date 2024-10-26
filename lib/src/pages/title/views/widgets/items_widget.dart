@@ -1,5 +1,5 @@
+import 'package:exam/src/pages/title/models/items_model.dart';
 import 'package:flutter/material.dart';
-import '../../../../infrastructure/common/item.dart';
 
 class ItemsWidget extends StatelessWidget {
   const ItemsWidget({
@@ -9,7 +9,7 @@ class ItemsWidget extends StatelessWidget {
     required this.onRemove,
   });
 
-  final Item item;
+  final ItemModel item;
   final void Function() onEdit;
   final void Function() onRemove;
 
