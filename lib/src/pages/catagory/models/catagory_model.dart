@@ -1,20 +1,33 @@
-import 'package:get/get.dart';
-
 import '../../../infrastructure/common/item.dart';
 
 class CatagoryModel {
   // Variable
   String title;
-  RxList<Item> items;
+  List<dynamic> itemsId;
 
   // Constractor
   CatagoryModel({
     required this.title,
-    required this.items,
+    required this.itemsId,
   });
   // Methods
-  CatagoryModel copyWith(String? title, RxList<Item>? items) {
+  CatagoryModel copyWith(
+      {String? title, List<Item>? items, List<dynamic>? itemsId}) {
     return CatagoryModel(
-        title: title ?? this.title, items: items ?? this.items);
+      title: title ?? this.title,
+      itemsId: itemsId ?? this.itemsId,
+    );
+  }
+
+  factory CatagoryModel.fromJson({required Map<String, dynamic> json}) {
+    return CatagoryModel(
+      title: json["title"],
+      itemsId: json["itemsId"],
+    );
+  }
+
+  @override
+  String toString() {
+    return '$title $itemsId';
   }
 }

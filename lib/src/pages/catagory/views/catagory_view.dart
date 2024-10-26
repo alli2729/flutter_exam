@@ -11,17 +11,43 @@ class CatagoryView extends GetView<CatagoryController> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _fab(),
+      floatingActionButton: Obx(() => _fab()),
       appBar: _appBar(),
-      body: _body(),
+      body: Obx(() => _body()),
     );
+  }
+
+  Widget _body() {
+    if (controller.isLoading.value) {
+      return _loading();
+    } else if (controller.isRetry.value) {
+      return _retry();
+    }
+    return _success();
   }
 
   //*Widgets
 
+  Widget _loading() {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget _retry() {
+    return Center(
+      child: IconButton(
+        onPressed: controller.getCatagories,
+        icon: const Icon(Icons.change_circle),
+      ),
+    );
+  }
+
   Widget _fab() {
     return FloatingActionButton(
-      onPressed: controller.addItem,
+      onPressed: (controller.isLoading.value || controller.isRetry.value)
+          ? null
+          : controller.addItem,
       child: const Icon(Icons.add),
     );
   }
@@ -31,13 +57,15 @@ class CatagoryView extends GetView<CatagoryController> {
         title: const Text('Catagory'),
       );
 
-  Widget _body() => Padding(
+  Widget _success() => Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
         child: Obx(
           () => ListView.separated(
             itemCount: controller.catagorires.length,
             itemBuilder: (_, index) => CatagoryWidget(
               catagory: controller.catagorires[index],
+              // total: controller.totals[index],
+              total: 0,
               onTap: () => controller.goToItems(index),
             ),
             separatorBuilder: (_, __) => const SizedBox(height: 12),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import '../../models/catagory_model.dart';
 
 class CatagoryWidget extends StatelessWidget {
@@ -7,9 +6,11 @@ class CatagoryWidget extends StatelessWidget {
     super.key,
     required this.catagory,
     required this.onTap,
+    required this.total,
   });
 
   final CatagoryModel catagory;
+  final double? total;
   final void Function() onTap;
 
   @override
@@ -24,22 +25,13 @@ class CatagoryWidget extends StatelessWidget {
           color: Colors.grey[200],
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(catagory.title, style: const TextStyle(fontSize: 20)),
-            const Spacer(),
-            Obx(() =>
-                Text('Total: ${sum()}', style: const TextStyle(fontSize: 20))),
+            Text('Total: $total', style: const TextStyle(fontSize: 20)),
           ],
         ),
       ),
     );
-  }
-
-  RxInt sum() {
-    int sum = 0;
-    for (int i = 0; i < catagory.items.length; i++) {
-      sum += catagory.items[i].price;
-    }
-    return sum.obs;
   }
 }
