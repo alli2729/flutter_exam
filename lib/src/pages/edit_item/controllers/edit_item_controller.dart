@@ -5,7 +5,9 @@ import '../models/items_model.dart';
 import '../repositories/edit_item_repository.dart';
 
 class EditItemController extends GetxController {
-  final int itemId = Get.arguments ?? '';
+  final int itemId;
+  EditItemController({required this.itemId});
+
   final EditItemRepository _repository = EditItemRepository();
   final nameController = TextEditingController();
   final priceController = TextEditingController();

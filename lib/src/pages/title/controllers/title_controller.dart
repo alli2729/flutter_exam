@@ -3,35 +3,23 @@ import 'package:get/get.dart';
 import '../models/items_model.dart';
 import '../repositories/title_repository.dart';
 import '../../../infrastructure/routes/route_names.dart';
-import '../../catagory/models/catagory_model.dart';
+import '../models/catagory_model.dart';
 import '../models/catagory_dto.dart';
 
 class TitleController extends GetxController {
-  final CatagoryModel cat = Get.arguments ?? '';
+  int? catagoryId;
+  TitleController({required this.catagoryId});
+
+  Rx<CatagoryModel> cat = Rx(CatagoryModel(id: 0, title: 'title', itemsId: []));
+
   final TitleRepository _repository = TitleRepository();
-
   RxList<ItemModel> items = RxList();
-
   RxBool isLoading = false.obs;
-
-  Future<void> getItems() async {
-    isLoading.value = true;
-    final result = await _repository.getItems(ids: cat.itemsId);
-    result?.fold(
-      (error) {
-        isLoading.value = false;
-      },
-      (list) {
-        isLoading.value = false;
-        items.value = list;
-      },
-    );
-  }
 
   Future<void> addItem() async {
     final result = await Get.toNamed(
       RouteNames.addItem,
-      arguments: cat,
+      parameters: {"catagoryId": "${cat.value.id}"},
     );
     if (result != null) {
       items.add(ItemModel(
@@ -45,7 +33,7 @@ class TitleController extends GetxController {
   Future<void> edit(int index) async {
     final result = await Get.toNamed(
       RouteNames.editItem,
-      arguments: items[index].id,
+      parameters: {"itemId": "${items[index].id}"},
     );
     if (result != null) {
       double price = result["price"];
@@ -57,10 +45,11 @@ class TitleController extends GetxController {
   }
 
   Future<void> remove(int index) async {
-    final List<dynamic> newList = cat.itemsId;
+    final List<dynamic> newList = cat.value.itemsId;
     newList.removeAt(index);
-    final CatagoryDto dto = CatagoryDto(title: cat.title, itemsId: newList);
-    final result = await _repository.removeItem(id: cat.id, dto: dto);
+    final CatagoryDto dto =
+        CatagoryDto(title: cat.value.title, itemsId: newList);
+    final result = await _repository.removeItem(id: cat.value.id, dto: dto);
 
     result?.fold(
       (error) {
@@ -80,9 +69,38 @@ class TitleController extends GetxController {
     ));
   }
 
+  Future<void> getCatagoryById(int id) async {
+    isLoading.value = true;
+    final result = await _repository.getCatagoryById(id: id);
+    result?.fold(
+      (exception) {
+        _showFailSnackBar(exception);
+        isLoading.value = false;
+      },
+      (catagory) {
+        cat.value = CatagoryModel.fromJson(json: catagory);
+        getItems();
+      },
+    );
+  }
+
+  Future<void> getItems() async {
+    isLoading.value = true;
+    final result = await _repository.getItems(ids: cat.value.itemsId);
+    result?.fold(
+      (error) {
+        isLoading.value = false;
+      },
+      (list) {
+        items.value = list;
+        isLoading.value = false;
+      },
+    );
+  }
+
   @override
   void onInit() {
     super.onInit();
-    getItems();
+    getCatagoryById(catagoryId!);
   }
 }

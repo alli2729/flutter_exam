@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../infrastructure/routes/route_names.dart';
 import '../models/catagory_model.dart';
-import '../repositories.dart/catagory_repository.dart';
+import '../repositories/catagory_repository.dart';
 
 class CatagoryController extends GetxController {
   final CatagoryRepository _repository = CatagoryRepository();
@@ -40,7 +40,7 @@ class CatagoryController extends GetxController {
 
   Future<void> goToItems(int index) async {
     final CatagoryModel cat = catagorires[index];
-    Get.toNamed(RouteNames.title, arguments: cat);
+    Get.toNamed(RouteNames.title, parameters: {"catagoryId": '${cat.id}'});
   }
 
   Future<void> addItem() async {

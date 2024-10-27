@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../repositories/add_item_repository.dart';
-import '../../catagory/models/catagory_model.dart';
+import '../models/catagory_model.dart';
 import '../models/add_item_dto.dart';
 import '../models/add_catagory_dto.dart';
 
 class AddItemController extends GetxController {
-  final CatagoryModel cat = Get.arguments ?? '';
+  int catagoryId;
+  AddItemController({required this.catagoryId});
+
+  Rx<CatagoryModel> cat = Rx(CatagoryModel(id: 0, title: 'title', itemsId: []));
+
   final nameController = TextEditingController();
   final priceController = TextEditingController();
   final formKey = GlobalKey<FormState>();
@@ -34,7 +38,7 @@ class AddItemController extends GetxController {
   }
 
   Future<void> addItemToCatagory(Map<String, dynamic> item) async {
-    final map = await _repository.getCatagory(catagoryId: cat.id);
+    final map = await _repository.getCatagory(catagoryId: cat.value.id);
     final CatagoryModel catagoryModel =
         CatagoryModel.fromJson(json: map!.right);
 
@@ -43,13 +47,13 @@ class AddItemController extends GetxController {
     catagoryModel.itemsId = newList;
 
     final AddCatagoryDto dto = AddCatagoryDto(
-      title: cat.title,
+      title: cat.value.title,
       itemsId: newList,
     );
 
     final result = await _repository.addItemToCatagory(
       catagoryDto: dto,
-      catagoryId: cat.id,
+      catagoryId: cat.value.id,
     );
 
     result?.fold(
@@ -75,5 +79,26 @@ class AddItemController extends GetxController {
   String? validate(String? value) {
     if (value != null && value.isEmpty) return 'required';
     return null;
+  }
+
+  Future<void> getCatagoryById(int id) async {
+    isLoading.value = true;
+    final result = await _repository.getCatagory(catagoryId: id);
+    result?.fold(
+      (exception) {
+        _showFailSnackBar(exception);
+        isLoading.value = false;
+      },
+      (catagory) {
+        cat.value = CatagoryModel.fromJson(json: catagory);
+        isLoading.value = false;
+      },
+    );
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    getCatagoryById(catagoryId);
   }
 }

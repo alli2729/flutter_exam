@@ -43,4 +43,16 @@ class TitleRepository {
       return Left(e.toString());
     }
   }
+
+  Future<Either<String, Map<String, dynamic>>?> getCatagoryById(
+      {required int id}) async {
+    try {
+      final url = UrlRepository.catagoryById(catagoryId: id);
+      final http.Response response = await http.get(url);
+      final Map<String, dynamic> catagory = json.decode(response.body);
+      return Right(catagory);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
 }

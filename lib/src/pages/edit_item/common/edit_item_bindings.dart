@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 class EditItemBindings extends Bindings {
   @override
   void dependencies() {
-    Get.lazyPut(() => EditItemController());
+    int? id = int.parse(Get.parameters["itemId"] ?? '');
+    Get.lazyPut(() => EditItemController(itemId: id));
   }
 }

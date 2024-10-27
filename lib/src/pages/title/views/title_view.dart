@@ -8,11 +8,13 @@ class TitleView extends GetView<TitleController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _fab(),
-      appBar: _appBar(),
-      body: Obx(() => _body()),
+    return Obx(
+      () => Scaffold(
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: _fab(),
+        appBar: _appBar(),
+        body: _body(),
+      ),
     );
   }
 
@@ -28,27 +30,33 @@ class TitleView extends GetView<TitleController> {
   Widget _fab() => FloatingActionButton(
         onPressed: controller.addItem,
         child: const Icon(Icons.add),
-  );
+      );
 
   AppBar _appBar() {
     return AppBar(
-      title: Text(controller.cat.title),
+      title: Text(controller.cat.value.title),
       centerTitle: true,
     );
   }
 
-  Widget _success() => Padding(
+  Widget _success() => (controller.items.isEmpty) ? _empty() : _filled();
+
+  Widget _empty() {
+    return const Center(
+      child: Text('List is empty'),
+    );
+  }
+
+  Widget _filled() => Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-        child: Obx(
-          () => ListView.separated(
-            itemCount: controller.items.length,
-            itemBuilder: (_, index) => ItemsWidget(
-              item: controller.items[index],
-              onEdit: () => controller.edit(index),
-              onRemove: () => controller.remove(index),
-            ),
-            separatorBuilder: (_, __) => const SizedBox(height: 12),
+        child: ListView.separated(
+          itemCount: controller.items.length,
+          itemBuilder: (_, index) => ItemsWidget(
+            item: controller.items[index],
+            onEdit: () => controller.edit(index),
+            onRemove: () => controller.remove(index),
           ),
+          separatorBuilder: (_, __) => const SizedBox(height: 12),
         ),
       );
 }
