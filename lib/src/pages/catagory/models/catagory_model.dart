@@ -1,4 +1,4 @@
-import '../../../infrastructure/common/item.dart';
+import 'items_model.dart';
 
 class CatagoryModel {
   // Variable
@@ -14,7 +14,7 @@ class CatagoryModel {
   });
   // Methods
   CatagoryModel copyWith(
-      {String? title, List<Item>? items, List<dynamic>? itemsId}) {
+      {String? title, List<ItemModel>? items, List<dynamic>? itemsId}) {
     return CatagoryModel(
       id: id,
       title: title ?? this.title,
