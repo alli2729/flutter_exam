@@ -37,20 +37,19 @@ class TitleController extends GetxController {
   // }
   // }
 
-  // Future<void> edit(int index) async {
-  //   final result = await Get.toNamed(
-  //     RouteNames.editItem,
-  //     // arguments: cat.items[index],
-  //   );
-  //   if (result != null) {
-  //     int price = int.parse(result[1]);
-  //     Item newItem = cat.items[index].copyWith();
-  //     newItem.name = result[0];
-  //     newItem.price = price;
-
-  //     cat.items[index] = newItem;
-  //   }
-  // }
+  Future<void> edit(int index) async {
+    final result = await Get.toNamed(
+      RouteNames.editItem,
+      arguments: items[index].id,
+    );
+    if (result != null) {
+      double price = result["price"];
+      ItemModel newItem = items[index].copyWith();
+      newItem.name = result["title"];
+      newItem.price = price;
+      items[index] = newItem;
+    }
+  }
 
   Future<void> remove(int index) async {
     final List<dynamic> newList = cat.itemsId;

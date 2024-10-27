@@ -9,17 +9,25 @@ class EditItemView extends GetView<EditItemController> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _fab(),
+      floatingActionButton: Obx(() => _fab()),
       appBar: _appBar(),
-      body: _body(),
+      body: Obx(() => _body()),
     );
   }
 
   Widget _fab() {
-    return FloatingActionButton(
-      onPressed: controller.edit,
-      child: const Icon(Icons.check),
-    );
+    return (controller.isSubmitting.value)
+        ? FloatingActionButton(
+            onPressed: null,
+            child: Transform.scale(
+              scale: 0.5,
+              child: const CircularProgressIndicator(),
+            ),
+          )
+        : FloatingActionButton(
+            onPressed: controller.edit,
+            child: const Icon(Icons.check),
+          );
   }
 
   AppBar _appBar() => AppBar(
@@ -28,6 +36,15 @@ class EditItemView extends GetView<EditItemController> {
       );
 
   Widget _body() {
+    if (controller.isLoading.value) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    return _success();
+  }
+
+  Widget _success() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Form(

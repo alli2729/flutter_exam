@@ -44,9 +44,8 @@ class TitleView extends GetView<TitleController> {
             itemCount: controller.items.length,
             itemBuilder: (_, index) => ItemsWidget(
               item: controller.items[index],
-              // onEdit: () => controller.edit(index),
+              onEdit: () => controller.edit(index),
               onRemove: () => controller.remove(index),
-              onEdit: () {},
             ),
             separatorBuilder: (_, __) => const SizedBox(height: 12),
           ),
