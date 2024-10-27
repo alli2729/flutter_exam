@@ -28,7 +28,7 @@ class CatagoryWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(catagory.title, style: const TextStyle(fontSize: 20)),
-            Text('Total: $total', style: const TextStyle(fontSize: 20)),
+            // Text('Total: $total', style: const TextStyle(fontSize: 20)),
           ],
         ),
       ),
