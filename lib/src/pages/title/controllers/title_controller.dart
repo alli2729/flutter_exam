@@ -28,14 +28,19 @@ class TitleController extends GetxController {
     );
   }
 
-  // Future<void> addItem() async {
-  // final result = await Get.toNamed(RouteNames.addItem);
-  // if (result != null) {
-  //   int price = int.parse(result[1]);
-  //   cat.items.add(Item(name: result[0], price: price));
-  //   refresh();
-  // }
-  // }
+  Future<void> addItem() async {
+    final result = await Get.toNamed(
+      RouteNames.addItem,
+      arguments: cat,
+    );
+    if (result != null) {
+      items.add(ItemModel(
+        id: result["id"],
+        name: result["title"],
+        price: result["price"],
+      ));
+    }
+  }
 
   Future<void> edit(int index) async {
     final result = await Get.toNamed(

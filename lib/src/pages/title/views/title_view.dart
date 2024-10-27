@@ -9,8 +9,8 @@ class TitleView extends GetView<TitleController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: _fab(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: _fab(),
       appBar: _appBar(),
       body: Obx(() => _body()),
     );
@@ -25,10 +25,10 @@ class TitleView extends GetView<TitleController> {
     return _success();
   }
 
-  // Widget _fab() => FloatingActionButton(
-  //       onPressed: controller.addItem,
-  //       child: const Icon(Icons.add),
-  // );
+  Widget _fab() => FloatingActionButton(
+        onPressed: controller.addItem,
+        child: const Icon(Icons.add),
+  );
 
   AppBar _appBar() {
     return AppBar(

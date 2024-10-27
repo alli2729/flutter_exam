@@ -9,17 +9,25 @@ class AddItemView extends GetView<AddItemController> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: _fab(),
+      floatingActionButton: Obx(() => _fab()),
       appBar: _appBar(),
-      body: _body(),
+      body: Obx(() => _body()),
     );
   }
 
   Widget _fab() {
-    return FloatingActionButton(
-      onPressed: controller.onSubmit,
-      child: const Icon(Icons.check),
-    );
+    return (controller.isLoading.value)
+        ? FloatingActionButton(
+            onPressed: null,
+            child: Transform.scale(
+              scale: 0.5,
+              child: const CircularProgressIndicator(),
+            ),
+          )
+        : FloatingActionButton(
+            onPressed: controller.addItem,
+            child: const Icon(Icons.check),
+          );
   }
 
   AppBar _appBar() {
@@ -29,7 +37,15 @@ class AddItemView extends GetView<AddItemController> {
     );
   }
 
-  Widget _body() {
+  Widget _body() => (controller.isLoading.value) ? _loading() : _success();
+
+  Widget _loading() {
+    return const Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
+  Widget _success() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: Form(
