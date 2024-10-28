@@ -1,11 +1,29 @@
 {
-  "users" : [
+  "users": [
     {
-      "id" : 1,
-      "name" : "ali",
-      "password" : "git"
+      "id": 1,
+      "name": "ali",
+      "password": "git"
     }
   ],
-  "catagories" : [],
-  "items" : []
+  "catagories": [
+    {
+      "title": "shoppping",
+      "itemsId": [],
+      "totalPrice": 0,
+      "id": 1
+    }
+  ],
+  "items": [
+    {
+      "title": "milk",
+      "price": 12,
+      "id": 1
+    },
+    {
+      "title": "cake",
+      "price": 10,
+      "id": 2
+    }
+  ]
 }

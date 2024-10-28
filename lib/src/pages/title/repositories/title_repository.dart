@@ -6,6 +6,27 @@ import '../models/items_model.dart';
 import 'package:http/http.dart' as http;
 
 class TitleRepository {
+  Future<Either<String, bool>> setTotal({
+    required CatagoryDto dto,
+    required int id,
+  }) async {
+    final url = UrlRepository.catagoryById(catagoryId: id);
+    final http.Response response = await http.patch(
+      url,
+      body: json.encode(dto.toJason()),
+      headers: {"Content-Type": "application/json"},
+    );
+
+    try {
+      if (response.statusCode != 200) {
+        return const Left('cannot get total price');
+      }
+      return const Right(true);
+    } catch (e) {
+      return Left(e.toString());
+    }
+  }
+
   Future<Either<String, List<ItemModel>>?> getItems({required List ids}) async {
     List<ItemModel> items = [];
     final url = UrlRepository.items;

@@ -19,7 +19,10 @@ class AddCatagoryController extends GetxController {
     if (!(formKey.currentState?.validate() ?? false)) return;
     isLoading.value = true;
 
-    final AddCatagoryDto dto = AddCatagoryDto(title: titleController.text);
+    final AddCatagoryDto dto = AddCatagoryDto(
+      title: titleController.text,
+      totalPrice: 0,
+    );
 
     final result = await _repository.addCatagory(dto: dto);
     result?.fold(

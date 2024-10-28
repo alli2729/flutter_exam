@@ -40,7 +40,12 @@ class CatagoryController extends GetxController {
 
   Future<void> goToItems(int index) async {
     final CatagoryModel cat = catagorires[index];
-    Get.toNamed(RouteNames.title, parameters: {"catagoryId": '${cat.id}'});
+    final result = await Get.toNamed(RouteNames.title, parameters: {
+      "catagoryId": '${cat.id}',
+    });
+    if (result != null) {
+      catagorires[index].totalPrice = result;
+    }
   }
 
   Future<void> addItem() async {

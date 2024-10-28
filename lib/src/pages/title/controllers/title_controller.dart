@@ -10,7 +10,12 @@ class TitleController extends GetxController {
   int? catagoryId;
   TitleController({required this.catagoryId});
 
-  Rx<CatagoryModel> cat = Rx(CatagoryModel(id: 0, title: 'title', itemsId: []));
+  Rx<CatagoryModel> cat = Rx(CatagoryModel(
+    id: 0,
+    title: 'title',
+    itemsId: [],
+    totalPrice: 0,
+  ));
 
   final TitleRepository _repository = TitleRepository();
   RxList<ItemModel> items = RxList();
@@ -45,10 +50,14 @@ class TitleController extends GetxController {
   }
 
   Future<void> remove(int index) async {
+    final totalPrice = getTotal();
     final List<dynamic> newList = cat.value.itemsId;
     newList.removeAt(index);
-    final CatagoryDto dto =
-        CatagoryDto(title: cat.value.title, itemsId: newList);
+    final CatagoryDto dto = CatagoryDto(
+      title: cat.value.title,
+      itemsId: newList,
+      totalPrice: totalPrice,
+    );
     final result = await _repository.removeItem(id: cat.value.id, dto: dto);
 
     result?.fold(
@@ -98,9 +107,35 @@ class TitleController extends GetxController {
     );
   }
 
+  double getTotal() {
+    double sum = 0;
+    for (ItemModel item in items) {
+      sum += item.price;
+    }
+    return sum;
+  }
+
   @override
   void onInit() {
     super.onInit();
     getCatagoryById(catagoryId!);
+  }
+
+  Future<void> back() async {
+    final CatagoryDto dto = CatagoryDto(
+      title: cat.value.title,
+      itemsId: cat.value.itemsId,
+      totalPrice: cat.value.totalPrice,
+    );
+    final result = await _repository.setTotal(dto: dto, id: cat.value.id);
+
+    result.fold(
+      (error) {
+        _showFailSnackBar(error);
+      },
+      (success) async {
+        Get.back(result: getTotal());
+      },
+    );
   }
 }

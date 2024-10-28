@@ -64,8 +64,6 @@ class CatagoryView extends GetView<CatagoryController> {
             itemCount: controller.catagorires.length,
             itemBuilder: (_, index) => CatagoryWidget(
               catagory: controller.catagorires[index],
-              // total: controller.totals[index],
-              total: 0,
               onTap: () => controller.goToItems(index),
             ),
             separatorBuilder: (_, __) => const SizedBox(height: 12),

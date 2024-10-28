@@ -21,7 +21,6 @@ class AddCatagoryRepository {
       }
       return const Left('Error');
     } catch (e) {
-      print(e.toString());
       return Left(e.toString());
     }
   }

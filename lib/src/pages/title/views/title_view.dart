@@ -36,6 +36,10 @@ class TitleView extends GetView<TitleController> {
     return AppBar(
       title: Text(controller.cat.value.title),
       centerTitle: true,
+      leading: IconButton(
+        onPressed: controller.back,
+        icon: const Icon(Icons.arrow_back),
+      ),
     );
   }
 

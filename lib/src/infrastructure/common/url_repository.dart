@@ -14,6 +14,10 @@ class UrlRepository {
     return Uri.http(_baseUrl, '$_catagories/$catagoryId');
   }
 
+  static Uri itemsByCatagoryId({required int catagoryId}) {
+    return Uri.parse('http://$_baseUrl/$_items?$catagoryId');
+  }
+
   static Uri itemsById({required int itemId}) {
     return Uri.http(_baseUrl, '$_items/$itemId');
   }

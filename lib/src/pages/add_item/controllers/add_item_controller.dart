@@ -9,7 +9,12 @@ class AddItemController extends GetxController {
   int catagoryId;
   AddItemController({required this.catagoryId});
 
-  Rx<CatagoryModel> cat = Rx(CatagoryModel(id: 0, title: 'title', itemsId: []));
+  Rx<CatagoryModel> cat = Rx(CatagoryModel(
+    id: 0,
+    title: 'title',
+    itemsId: [],
+    totalPrice: 0,
+  ));
 
   final nameController = TextEditingController();
   final priceController = TextEditingController();
@@ -49,6 +54,7 @@ class AddItemController extends GetxController {
     final AddCatagoryDto dto = AddCatagoryDto(
       title: cat.value.title,
       itemsId: newList,
+      totalPrice: cat.value.totalPrice,
     );
 
     final result = await _repository.addItemToCatagory(

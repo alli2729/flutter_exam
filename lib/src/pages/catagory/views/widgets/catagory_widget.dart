@@ -6,11 +6,9 @@ class CatagoryWidget extends StatelessWidget {
     super.key,
     required this.catagory,
     required this.onTap,
-    required this.total,
   });
 
   final CatagoryModel catagory;
-  final double? total;
   final void Function() onTap;
 
   @override
@@ -28,7 +26,10 @@ class CatagoryWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(catagory.title, style: const TextStyle(fontSize: 20)),
-            // Text('Total: $total', style: const TextStyle(fontSize: 20)),
+            Text(
+              'Total: ${catagory.totalPrice}',
+              style: const TextStyle(fontSize: 20),
+            ),
           ],
         ),
       ),
