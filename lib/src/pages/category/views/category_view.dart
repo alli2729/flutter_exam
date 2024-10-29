@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //
-import '../controllers/catagory_controller.dart';
-import 'widgets/catagory_widget.dart';
+import '../controllers/category_controller.dart';
+import 'widgets/category_widget.dart';
 
-class CatagoryView extends GetView<CatagoryController> {
-  const CatagoryView({super.key});
+class CategoryView extends GetView<CatagoryController> {
+  const CategoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class CatagoryView extends GetView<CatagoryController> {
   Widget _retry() {
     return Center(
       child: IconButton(
-        onPressed: controller.getCatagories,
+        onPressed: controller.getCetagories,
         icon: const Icon(Icons.change_circle),
       ),
     );
@@ -62,7 +62,7 @@ class CatagoryView extends GetView<CatagoryController> {
         child: Obx(
           () => ListView.separated(
             itemCount: controller.catagorires.length,
-            itemBuilder: (_, index) => CatagoryWidget(
+            itemBuilder: (_, index) => CategoryWidget(
               catagory: controller.catagorires[index],
               // total: controller.totals[index],
               total: 0,

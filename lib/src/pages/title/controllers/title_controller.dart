@@ -1,32 +1,39 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../models/items_model.dart';
-import '../repositories/title_repository.dart';
+import '../../../infrastructure/utils/utils.dart';
 import '../../../infrastructure/routes/route_names.dart';
-import '../models/catagory_model.dart';
-import '../models/catagory_dto.dart';
+import '../models/item_model.dart';
+import '../repositories/title_repository.dart';
 
 class TitleController extends GetxController {
-  int? catagoryId;
-  TitleController({required this.catagoryId});
-
-  Rx<CatagoryModel> cat = Rx(CatagoryModel(id: 0, title: 'title', itemsId: []));
+  int? categoryId;
+  TitleController({required this.categoryId});
 
   final TitleRepository _repository = TitleRepository();
   RxList<ItemModel> items = RxList();
   RxBool isLoading = false.obs;
 
+  Future<void> getItems() async {
+    isLoading.value = true;
+    final result = await _repository.getItems(categoryId: categoryId!);
+    result?.fold(
+      (error) {
+        isLoading.value = false;
+        Utils.showFailSnackBar(error);
+      },
+      (list) {
+        items.value = list;
+        isLoading.value = false;
+      },
+    );
+  }
+
   Future<void> addItem() async {
     final result = await Get.toNamed(
       RouteNames.addItem,
-      parameters: {"catagoryId": "${cat.value.id}"},
+      parameters: {"categoryId": "$categoryId"},
     );
     if (result != null) {
-      items.add(ItemModel(
-        id: result["id"],
-        name: result["title"],
-        price: result["price"],
-      ));
+      items.add(ItemModel.fromJason(result));
     }
   }
 
@@ -45,15 +52,11 @@ class TitleController extends GetxController {
   }
 
   Future<void> remove(int index) async {
-    final List<dynamic> newList = cat.value.itemsId;
-    newList.removeAt(index);
-    final CatagoryDto dto =
-        CatagoryDto(title: cat.value.title, itemsId: newList);
-    final result = await _repository.removeItem(id: cat.value.id, dto: dto);
+    final result = await _repository.removeItem(itemId: items[index].id);
 
     result?.fold(
       (error) {
-        _showFailSnackBar(error);
+        Utils.showFailSnackBar(error);
       },
       (success) {
         items.removeAt(index);
@@ -61,46 +64,9 @@ class TitleController extends GetxController {
     );
   }
 
-  void _showFailSnackBar(String message) {
-    Get.showSnackbar(GetSnackBar(
-      message: message,
-      backgroundColor: Colors.red.shade300,
-      duration: const Duration(seconds: 2),
-    ));
-  }
-
-  Future<void> getCatagoryById(int id) async {
-    isLoading.value = true;
-    final result = await _repository.getCatagoryById(id: id);
-    result?.fold(
-      (exception) {
-        _showFailSnackBar(exception);
-        isLoading.value = false;
-      },
-      (catagory) {
-        cat.value = CatagoryModel.fromJson(json: catagory);
-        getItems();
-      },
-    );
-  }
-
-  Future<void> getItems() async {
-    isLoading.value = true;
-    final result = await _repository.getItems(ids: cat.value.itemsId);
-    result?.fold(
-      (error) {
-        isLoading.value = false;
-      },
-      (list) {
-        items.value = list;
-        isLoading.value = false;
-      },
-    );
-  }
-
   @override
   void onInit() {
     super.onInit();
-    getCatagoryById(catagoryId!);
+    getItems();
   }
 }

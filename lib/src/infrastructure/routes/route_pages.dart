@@ -7,11 +7,11 @@ import '../../pages/splash/views/splash_view.dart';
 import '../../pages/edit_item/common/edit_item_bindings.dart';
 import '../../pages/edit_item/views/edit_item_view.dart';
 import '../../pages/add_item/common/add_item_bindings.dart';
-import '../../pages/add_catagory/common/add_catagory_bindings.dart';
-import '../../pages/add_catagory/views/add_catagory_view.dart';
+import '../../pages/add_category/common/add_category_bindings.dart';
+import '../../pages/add_category/views/add_category_view.dart';
 import '../../pages/add_item/views/add_item_view.dart';
-import '../../pages/catagory/common/catagory_bindings.dart';
-import '../../pages/catagory/views/catagory_view.dart';
+import '../../pages/category/common/category_bindings.dart';
+import '../../pages/category/views/category_view.dart';
 import '../../pages/title/common/title_bindings.dart';
 import '../../pages/title/views/title_view.dart';
 import 'package:get/get.dart';
@@ -38,11 +38,11 @@ class RoutePages {
             binding: RegisterBindings(),
           )
         ]),
-    //* catagory (HOME)
+    //* category (HOME)
     GetPage(
-      name: RoutePath.catagory,
-      page: () => const CatagoryView(),
-      binding: CatagoryBindings(),
+      name: RoutePath.category,
+      page: () => const CategoryView(),
+      binding: CategoryBindings(),
       children: [
         //* Title
         GetPage(
@@ -64,11 +64,11 @@ class RoutePages {
             ),
           ],
         ),
-        //* add Catagory
+        //* add Category
         GetPage(
-          name: RoutePath.addCatagory,
-          page: () => const AddCatagoryView(),
-          binding: AddCatagoryBindings(),
+          name: RoutePath.addCategory,
+          page: () => const AddCategoryView(),
+          binding: AddCategoryBindings(),
         )
       ],
     ),

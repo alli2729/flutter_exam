@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../infrastructure/utils/utils.dart';
 import '../models/edit_item_dto.dart';
-import '../models/items_model.dart';
+import '../models/item_model.dart';
 import '../repositories/edit_item_repository.dart';
 
 class EditItemController extends GetxController {
@@ -16,7 +17,7 @@ class EditItemController extends GetxController {
   RxBool isLoading = false.obs;
   RxBool isSubmitting = false.obs;
 
-  ItemModel item = ItemModel(name: 'name', price: 0, id: 0);
+  ItemModel item = ItemModel(name: 'name', price: 0, id: 0, categoryId: 0);
 
   Future<void> findItem(int id) async {
     isLoading.value = true;
@@ -24,10 +25,10 @@ class EditItemController extends GetxController {
     result?.fold(
       (exception) {
         isLoading.value = false;
-        _showFailSnackBar(exception);
+        Utils.showFailSnackBar(exception);
       },
-      (map) {
-        item = ItemModel.fromJason(map);
+      (itemModel) {
+        item = ItemModel.fromJason(itemModel);
         nameController.text = item.name;
         priceController.text = item.price.toString();
         isLoading.value = false;
@@ -49,6 +50,7 @@ class EditItemController extends GetxController {
     final EditItemDto dto = EditItemDto(
       title: nameController.text,
       price: editedPrice,
+      categoryId: item.categoryId,
     );
 
     final result = await _repository.editItem(dto: dto, id: item.id);
@@ -56,7 +58,7 @@ class EditItemController extends GetxController {
     result?.fold(
       (exception) {
         isSubmitting.value = false;
-        _showFailSnackBar(exception);
+        Utils.showFailSnackBar(exception);
       },
       (success) {
         isSubmitting.value = false;
@@ -68,17 +70,16 @@ class EditItemController extends GetxController {
     );
   }
 
-  void _showFailSnackBar(String message) {
-    Get.showSnackbar(GetSnackBar(
-      message: message,
-      backgroundColor: Colors.red.shade300,
-      duration: const Duration(seconds: 2),
-    ));
-  }
-
   @override
   void onInit() {
     super.onInit();
     findItem(itemId);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+    priceController.dispose();
   }
 }

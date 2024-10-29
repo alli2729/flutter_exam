@@ -1,4 +1,4 @@
-import 'package:exam/src/pages/title/models/items_model.dart';
+import 'package:exam/src/pages/title/models/item_model.dart';
 import 'package:flutter/material.dart';
 
 class ItemsWidget extends StatelessWidget {

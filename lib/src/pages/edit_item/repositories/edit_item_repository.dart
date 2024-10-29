@@ -7,10 +7,9 @@ import '../../../infrastructure/common/url_repository.dart';
 class EditItemRepository {
   Future<Either<String, Map<String, dynamic>>?> findItem(
       {required int id}) async {
-    final url = UrlRepository.itemsById(itemId: id);
-    final http.Response response = await http.get(url);
-
     try {
+      final url = UrlRepository.itemsById(itemId: id);
+      final http.Response response = await http.get(url);
       final Map<String, dynamic> result = json.decode(response.body);
       return Right(result);
     } catch (e) {

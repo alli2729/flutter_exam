@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../infrastructure/utils/utils.dart';
 import '../models/register_dto.dart';
 import '../repositories/register_repository.dart';
 
@@ -20,10 +21,9 @@ class RegisterController extends GetxController {
   Future<void> onRegister() async {
     if (!(formKey.currentState?.validate() ?? false)) return;
     if (passController.text != rPassController.text) {
-      _showPasswordSnackBar();
+      Utils.showFailSnackBar('Password is not matching');
       return;
     }
-
     isLoading.value = true;
 
     final RegisterDto dto = RegisterDto(
@@ -36,32 +36,12 @@ class RegisterController extends GetxController {
     result?.fold(
       (exception) {
         isLoading.value = false;
-        _showFailSnackBar(exception);
+        Utils.showFailSnackBar(exception);
       },
       (map) {
         isLoading.value = false;
         Get.back(result: map);
       },
-    );
-  }
-
-  void _showFailSnackBar(String message) {
-    Get.showSnackbar(
-      GetSnackBar(
-        message: message,
-        backgroundColor: Colors.red.withOpacity(.5),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
-
-  void _showPasswordSnackBar() {
-    Get.showSnackbar(
-      GetSnackBar(
-        message: 'Password is not matching',
-        backgroundColor: Colors.red.withOpacity(.5),
-        duration: const Duration(seconds: 2),
-      ),
     );
   }
 

@@ -1,8 +1,6 @@
 import 'dart:convert';
-
 import 'package:either_dart/either.dart';
 import 'package:http/http.dart' as http;
-
 import '../models/register_dto.dart';
 import '../../../infrastructure/common/url_repository.dart';
 

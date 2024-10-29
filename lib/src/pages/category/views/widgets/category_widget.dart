@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import '../../models/catagory_model.dart';
+import '../../models/category_model.dart';
 
-class CatagoryWidget extends StatelessWidget {
-  const CatagoryWidget({
+class CategoryWidget extends StatelessWidget {
+  const CategoryWidget({
     super.key,
     required this.catagory,
     required this.onTap,
     required this.total,
   });
 
-  final CatagoryModel catagory;
+  final CategoryModel catagory;
   final double? total;
   final void Function() onTap;
 

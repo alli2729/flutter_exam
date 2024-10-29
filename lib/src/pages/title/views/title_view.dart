@@ -34,7 +34,7 @@ class TitleView extends GetView<TitleController> {
 
   AppBar _appBar() {
     return AppBar(
-      title: Text(controller.cat.value.title),
+      title: const Text("Items"),
       centerTitle: true,
     );
   }

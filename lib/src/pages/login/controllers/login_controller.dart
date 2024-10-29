@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../infrastructure/utils/utils.dart';
 import '../../../infrastructure/routes/route_names.dart';
 import '../repositories/login_repository.dart';
 
@@ -28,11 +29,11 @@ class LoginController extends GetxController {
     result?.fold(
       (exception) {
         isLoading.value = false;
-        _showFailSnackBar(exception);
+        Utils.showFailSnackBar(exception);
       },
       (success) {
         isLoading.value = false;
-        Get.offNamed(RouteNames.catagory);
+        Get.offNamed(RouteNames.category);
       },
     );
   }
@@ -42,34 +43,8 @@ class LoginController extends GetxController {
     if (result != null) {
       userController.text = result["name"];
       passController.text = result["password"];
-      _showSuccessSnackBar('user successfully created');
+      Utils.showSuccessSnackBar('user successfully created');
     }
-  }
-
-  void _showSuccessSnackBar(String message) {
-    Get.showSnackbar(
-      GetSnackBar(
-        messageText: Text(
-          message,
-          style: const TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.green.withOpacity(.5),
-        duration: const Duration(seconds: 2),
-      ),
-    );
-  }
-
-  void _showFailSnackBar(String message) {
-    Get.showSnackbar(
-      GetSnackBar(
-        messageText: Text(
-          message,
-          style: const TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.red.withOpacity(.5),
-        duration: const Duration(seconds: 2),
-      ),
-    );
   }
 
   @override

@@ -1,11 +1,17 @@
 class EditItemDto {
   String title;
   double price;
+  int categoryId;
 
-  EditItemDto({required this.title, required this.price});
+  EditItemDto({
+    required this.title,
+    required this.price,
+    required this.categoryId,
+  });
 
   Map<String, dynamic> toJson() => {
-      "title": title,
-      "price": price,
-    };
+        "name": title,
+        "price": price,
+        "categoryId": categoryId,
+      };
 }

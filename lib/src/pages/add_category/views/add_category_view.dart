@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/add_catagory_controller.dart';
+import '../controllers/add_category_controller.dart';
 
-class AddCatagoryView extends GetView<AddCatagoryController> {
-  const AddCatagoryView({super.key});
+class AddCategoryView extends GetView<AddCategoryController> {
+  const AddCategoryView({super.key});
 
   @override
   Widget build(BuildContext context) {
