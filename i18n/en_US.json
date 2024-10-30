@@ -14,6 +14,9 @@
       "rPassword" :"repeat Password",
       "or" : "or",
       "login" : "Login"
+    },
+    "category_page":{
+      "category" : "Category"
     }
   }
 }

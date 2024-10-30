@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 //
+import '../../../../generated/locales.g.dart';
 import '../controllers/category_controller.dart';
 import 'widgets/category_widget.dart';
 
@@ -54,7 +55,7 @@ class CategoryView extends GetView<CatagoryController> {
 
   AppBar _appBar() => AppBar(
         centerTitle: true,
-        title: const Text('Catagory'),
+        title: Text(LocaleKeys.flutter_exam_category_page_category.tr),
       );
 
   Widget _success() => Padding(

@@ -1,5 +1,11 @@
 {
-  "users": [],
+  "users": [
+    {
+      "name": "ali",
+      "password": "git",
+      "id": 1
+    }
+  ],
   "categories": [],
   "items": []
 }

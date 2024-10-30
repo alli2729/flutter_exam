@@ -97,7 +97,7 @@ class RegisterView extends GetView<RegisterController> {
       validator: controller.validate,
       obscureText: true,
       decoration: InputDecoration(
-        labelText: LocaleKeys.flutter_exam_register_page_password.tr,
+        labelText: LocaleKeys.flutter_exam_register_page_rPassword.tr,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -111,7 +111,7 @@ class RegisterView extends GetView<RegisterController> {
       validator: controller.validate,
       obscureText: true,
       decoration: InputDecoration(
-        labelText: LocaleKeys.flutter_exam_register_page_rPassword.tr,
+        labelText: LocaleKeys.flutter_exam_register_page_password.tr,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),

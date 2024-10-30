@@ -30,6 +30,8 @@ class LocaleKeys {
   static const flutter_exam_register_page_or = 'flutter_exam_register_page_or';
   static const flutter_exam_register_page_login =
       'flutter_exam_register_page_login';
+  static const flutter_exam_category_page_category =
+      'flutter_exam_category_page_category';
 }
 
 class Locales {
@@ -45,6 +47,7 @@ class Locales {
     'flutter_exam_register_page_rPassword': 'repeat Password',
     'flutter_exam_register_page_or': 'or',
     'flutter_exam_register_page_login': 'Login',
+    'flutter_exam_category_page_category': 'Category',
   };
   static const fa_IR = {
     'flutter_exam_login_page_login': 'وارد شوید',
@@ -58,5 +61,6 @@ class Locales {
     'flutter_exam_register_page_rPassword': 'تکرار رمز عبور',
     'flutter_exam_register_page_or': 'یا',
     'flutter_exam_register_page_login': 'وارد شوید',
+    'flutter_exam_category_page_category': 'دسته بندی',
   };
 }

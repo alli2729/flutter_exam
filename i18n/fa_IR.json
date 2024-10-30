@@ -14,6 +14,9 @@
       "rPassword": "تکرار رمز عبور",
       "or": "یا",
       "login": "وارد شوید"
+    },
+    "category_page":{
+      "category" : "دسته بندی"
     }
   }
 }
