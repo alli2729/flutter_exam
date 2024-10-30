@@ -1,0 +1,19 @@
+{
+  "flutter_exam":{
+    "login_page" :{
+      "login" : "Login",
+      "register" : "Register",
+      "username":"Username",
+      "password" : "Password",
+      "or" : "or"
+    },
+    "register_page" : {
+      "register" : "Register",
+      "username":"Username",
+      "password":"Password",
+      "rPassword" :"repeat Password",
+      "or" : "or",
+      "login" : "Login"
+    }
+  }
+}

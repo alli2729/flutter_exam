@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../generated/locales.g.dart';
 import '../controllers/login_controller.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -27,12 +28,19 @@ class LoginView extends GetView<LoginController> {
             const SizedBox(height: 16),
             Obx(() => _login()),
             const SizedBox(height: 16),
-            const Text('or', style: TextStyle(fontSize: 16)),
+            _orText(),
             const SizedBox(height: 16),
             Obx(() => _register()),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _orText() {
+    return Text(
+      LocaleKeys.flutter_exam_login_page_or.tr,
+      style: const TextStyle(fontSize: 16),
     );
   }
 
@@ -47,9 +55,9 @@ class LoginView extends GetView<LoginController> {
             borderRadius: BorderRadius.circular(12),
             color: (controller.isLoading.value) ? Colors.grey : Colors.cyan,
           ),
-          child: const Text(
-            'LOGIN',
-            style: TextStyle(
+          child: Text(
+            LocaleKeys.flutter_exam_login_page_login.tr,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: Colors.white,
@@ -62,7 +70,7 @@ class LoginView extends GetView<LoginController> {
         onTap: (controller.isLoading.value) ? null : controller.onRegister,
         borderRadius: BorderRadius.circular(12),
         child: Text(
-          'REGISTER',
+          LocaleKeys.flutter_exam_login_page_register.tr,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
@@ -76,7 +84,7 @@ class LoginView extends GetView<LoginController> {
       controller: controller.userController,
       validator: controller.validate,
       decoration: InputDecoration(
-        labelText: 'Username',
+        labelText: LocaleKeys.flutter_exam_login_page_username.tr,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -90,7 +98,7 @@ class LoginView extends GetView<LoginController> {
       validator: controller.validate,
       obscureText: true,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: LocaleKeys.flutter_exam_login_page_password.tr,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -100,7 +108,7 @@ class LoginView extends GetView<LoginController> {
 
   AppBar _appBar() {
     return AppBar(
-      title: const Text('LOGIN'),
+      title: Text(LocaleKeys.flutter_exam_login_page_login.tr),
       centerTitle: true,
     );
   }

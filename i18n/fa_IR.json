@@ -1,0 +1,19 @@
+{
+  "flutter_exam": {
+    "login_page": {
+      "login": "وارد شوید",
+      "register": "ثبت نام کنید",
+      "username": "نام کاربری",
+      "password": "رمز عبور",
+      "or": "یا"
+    },
+    "register_page": {
+      "register": "ثبت نام کنید",
+      "username": "نام کاربری",
+      "password": "رمز عبور",
+      "rPassword": "تکرار رمز عبور",
+      "or": "یا",
+      "login": "وارد شوید"
+    }
+  }
+}

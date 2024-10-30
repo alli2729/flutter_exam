@@ -1,3 +1,5 @@
+import 'package:exam/generated/locales.g.dart';
+
 import '../controllers/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +31,10 @@ class RegisterView extends GetView<RegisterController> {
             const SizedBox(height: 16),
             Obx(() => _register()),
             const SizedBox(height: 16),
-            const Text('or', style: TextStyle(fontSize: 16)),
+            Text(
+              LocaleKeys.flutter_exam_register_page_or.tr,
+              style: const TextStyle(fontSize: 16),
+            ),
             const SizedBox(height: 16),
             Obx(() => _login()),
           ],
@@ -49,9 +54,9 @@ class RegisterView extends GetView<RegisterController> {
             borderRadius: BorderRadius.circular(12),
             color: (controller.isLoading.value) ? Colors.grey : Colors.cyan,
           ),
-          child: const Text(
-            'REGISTER',
-            style: TextStyle(
+          child: Text(
+            LocaleKeys.flutter_exam_register_page_register.tr,
+            style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 16,
               color: Colors.white,
@@ -64,7 +69,7 @@ class RegisterView extends GetView<RegisterController> {
         onTap: (controller.isLoading.value) ? null : controller.onLogin,
         borderRadius: BorderRadius.circular(12),
         child: Text(
-          'LOGIN',
+          LocaleKeys.flutter_exam_register_page_login.tr,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 14,
@@ -78,7 +83,7 @@ class RegisterView extends GetView<RegisterController> {
       controller: controller.userController,
       validator: controller.validate,
       decoration: InputDecoration(
-        labelText: 'Username',
+        labelText: LocaleKeys.flutter_exam_register_page_username.tr,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -92,7 +97,7 @@ class RegisterView extends GetView<RegisterController> {
       validator: controller.validate,
       obscureText: true,
       decoration: InputDecoration(
-        labelText: 'repeat Password',
+        labelText: LocaleKeys.flutter_exam_register_page_password.tr,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -106,7 +111,7 @@ class RegisterView extends GetView<RegisterController> {
       validator: controller.validate,
       obscureText: true,
       decoration: InputDecoration(
-        labelText: 'Password',
+        labelText: LocaleKeys.flutter_exam_register_page_rPassword.tr,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
         ),
@@ -117,7 +122,7 @@ class RegisterView extends GetView<RegisterController> {
   AppBar _appBar() {
     return AppBar(
       automaticallyImplyLeading: false,
-      title: const Text('REGISTER'),
+      title: Text(LocaleKeys.flutter_exam_register_page_register.tr),
       centerTitle: true,
     );
   }
