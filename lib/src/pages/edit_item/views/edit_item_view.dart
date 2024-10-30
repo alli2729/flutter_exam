@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../generated/locales.g.dart';
 import '../controllers/edit_item_controller.dart';
 
 class EditItemView extends GetView<EditItemController> {
@@ -31,7 +32,7 @@ class EditItemView extends GetView<EditItemController> {
   }
 
   AppBar _appBar() => AppBar(
-        title: const Text('Edit Item'),
+        title: Text(LocaleKeys.flutter_exam_edit_item_page_editItem.tr),
         centerTitle: true,
       );
 
@@ -65,9 +66,9 @@ class EditItemView extends GetView<EditItemController> {
     return TextFormField(
       validator: controller.validate,
       controller: controller.priceController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Price',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: LocaleKeys.flutter_exam_edit_item_page_price.tr,
       ),
     );
   }
@@ -76,9 +77,9 @@ class EditItemView extends GetView<EditItemController> {
     return TextFormField(
       validator: controller.validate,
       controller: controller.nameController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Name',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: LocaleKeys.flutter_exam_edit_item_page_name.tr,
       ),
     );
   }

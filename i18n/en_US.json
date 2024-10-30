@@ -26,6 +26,16 @@
       "items":"Items",
       "emptyList":"List is empty",
       "money" : "T"
+    },
+    "add_item_page":{
+      "addItem" : "Add Item",
+      "price":"Price",
+      "name":"Name"
+    },
+    "edit_item_page":{
+      "editItem":"Edit Item",
+      "price":"Price",
+      "name":"Name"
     }
   }
 }

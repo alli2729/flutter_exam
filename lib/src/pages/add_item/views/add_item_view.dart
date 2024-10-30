@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../generated/locales.g.dart';
 import '../controllers/add_item_controller.dart';
 
 class AddItemView extends GetView<AddItemController> {
@@ -32,7 +33,7 @@ class AddItemView extends GetView<AddItemController> {
 
   AppBar _appBar() {
     return AppBar(
-      title: const Text('Add Item'),
+      title: Text(LocaleKeys.flutter_exam_add_item_page_addItem.tr),
       centerTitle: true,
     );
   }
@@ -66,9 +67,9 @@ class AddItemView extends GetView<AddItemController> {
     return TextFormField(
       validator: controller.validate,
       controller: controller.priceController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Price',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: LocaleKeys.flutter_exam_add_item_page_name.tr,
       ),
     );
   }
@@ -77,9 +78,9 @@ class AddItemView extends GetView<AddItemController> {
     return TextFormField(
       validator: controller.validate,
       controller: controller.nameController,
-      decoration: const InputDecoration(
-        border: OutlineInputBorder(),
-        labelText: 'Name',
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        labelText: LocaleKeys.flutter_exam_add_item_page_price.tr,
       ),
     );
   }

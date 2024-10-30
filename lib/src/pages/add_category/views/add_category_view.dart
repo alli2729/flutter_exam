@@ -1,6 +1,6 @@
-import 'package:exam/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../generated/locales.g.dart';
 import '../controllers/add_category_controller.dart';
 
 class AddCategoryView extends GetView<AddCategoryController> {

@@ -40,6 +40,18 @@ class LocaleKeys {
   static const flutter_exam_title_page_emptyList =
       'flutter_exam_title_page_emptyList';
   static const flutter_exam_title_page_money = 'flutter_exam_title_page_money';
+  static const flutter_exam_add_item_page_addItem =
+      'flutter_exam_add_item_page_addItem';
+  static const flutter_exam_add_item_page_price =
+      'flutter_exam_add_item_page_price';
+  static const flutter_exam_add_item_page_name =
+      'flutter_exam_add_item_page_name';
+  static const flutter_exam_edit_item_page_editItem =
+      'flutter_exam_edit_item_page_editItem';
+  static const flutter_exam_edit_item_page_price =
+      'flutter_exam_edit_item_page_price';
+  static const flutter_exam_edit_item_page_name =
+      'flutter_exam_edit_item_page_name';
 }
 
 class Locales {
@@ -61,6 +73,12 @@ class Locales {
     'flutter_exam_title_page_items': 'Items',
     'flutter_exam_title_page_emptyList': 'List is empty',
     'flutter_exam_title_page_money': 'T',
+    'flutter_exam_add_item_page_addItem': 'Add Item',
+    'flutter_exam_add_item_page_price': 'Price',
+    'flutter_exam_add_item_page_name': 'Name',
+    'flutter_exam_edit_item_page_editItem': 'Edit Item',
+    'flutter_exam_edit_item_page_price': 'Price',
+    'flutter_exam_edit_item_page_name': 'Name',
   };
   static const fa_IR = {
     'flutter_exam_login_page_login': 'وارد شوید',
@@ -80,5 +98,11 @@ class Locales {
     'flutter_exam_title_page_items': 'آیتم',
     'flutter_exam_title_page_emptyList': 'لیست خالی است',
     'flutter_exam_title_page_money': 'ت',
+    'flutter_exam_add_item_page_addItem': 'اضافه کردن آیتم',
+    'flutter_exam_add_item_page_price': 'قیمت',
+    'flutter_exam_add_item_page_name': 'عنوان',
+    'flutter_exam_edit_item_page_editItem': 'ویرایش آیتم',
+    'flutter_exam_edit_item_page_price': 'قیمت',
+    'flutter_exam_edit_item_page_name': 'عنوان',
   };
 }

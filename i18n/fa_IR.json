@@ -25,6 +25,16 @@
       "items":"آیتم",
       "emptyList":"لیست خالی است",
       "money" : "ت"
+    },
+    "add_item_page":{
+      "addItem" : "اضافه کردن آیتم",
+      "price":"قیمت",
+      "name":"عنوان"
+    },
+    "edit_item_page":{
+      "editItem":"ویرایش آیتم",
+      "price":"قیمت",
+      "name":"عنوان"
     }
   }
 }
