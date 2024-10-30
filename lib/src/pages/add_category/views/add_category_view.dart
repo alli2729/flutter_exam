@@ -1,3 +1,4 @@
+import 'package:exam/generated/locales.g.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/add_category_controller.dart';
@@ -32,7 +33,7 @@ class AddCategoryView extends GetView<AddCategoryController> {
 
   AppBar _appBar() {
     return AppBar(
-      title: const Text('Add Catagory'),
+      title: Text(LocaleKeys.flutter_exam_add_category_page_addCategory.tr),
       centerTitle: true,
       automaticallyImplyLeading: false,
     );
@@ -47,9 +48,9 @@ class AddCategoryView extends GetView<AddCategoryController> {
           child: TextFormField(
             validator: controller.validate,
             controller: controller.titleController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Title',
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              labelText: LocaleKeys.flutter_exam_add_category_page_title.tr,
             ),
           ),
         ),

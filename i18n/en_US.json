@@ -17,6 +17,15 @@
     },
     "category_page":{
       "category" : "Category"
+    },
+    "add_category_page":{
+      "addCategory":"Add Category",
+      "title":"Title"
+    },
+    "title_page" : {
+      "items":"Items",
+      "emptyList":"List is empty",
+      "money" : "T"
     }
   }
 }

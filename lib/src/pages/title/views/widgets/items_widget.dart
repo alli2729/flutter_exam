@@ -1,5 +1,7 @@
-import 'package:exam/src/pages/title/models/item_model.dart';
+import '../../../../../generated/locales.g.dart';
+import '../../models/item_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ItemsWidget extends StatelessWidget {
   const ItemsWidget({
@@ -25,7 +27,8 @@ class ItemsWidget extends StatelessWidget {
         children: [
           Text(item.name, style: const TextStyle(fontSize: 20)),
           const Spacer(),
-          Text('${item.price} T', style: const TextStyle(fontSize: 20)),
+          Text('${item.price} ${LocaleKeys.flutter_exam_title_page_money.tr}',
+              style: const TextStyle(fontSize: 20)),
           const Spacer(),
           _editButton(),
           _removeButton(),

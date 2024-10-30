@@ -17,6 +17,14 @@
     },
     "category_page":{
       "category" : "دسته بندی"
+    },"add_category_page":{
+      "addCategory":"اضافه کردن دسته بندی",
+      "title":"عنوان"
+    },
+    "title_page" : {
+      "items":"آیتم",
+      "emptyList":"لیست خالی است",
+      "money" : "ت"
     }
   }
 }

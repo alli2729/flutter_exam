@@ -1,6 +1,7 @@
 import 'widgets/items_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../../generated/locales.g.dart';
 import '../controllers/title_controller.dart';
 
 class TitleView extends GetView<TitleController> {
@@ -34,7 +35,7 @@ class TitleView extends GetView<TitleController> {
 
   AppBar _appBar() {
     return AppBar(
-      title: const Text("Items"),
+      title: Text(LocaleKeys.flutter_exam_title_page_items.tr),
       centerTitle: true,
     );
   }
@@ -42,8 +43,8 @@ class TitleView extends GetView<TitleController> {
   Widget _success() => (controller.items.isEmpty) ? _empty() : _filled();
 
   Widget _empty() {
-    return const Center(
-      child: Text('List is empty'),
+    return Center(
+      child: Text(LocaleKeys.flutter_exam_title_page_emptyList.tr),
     );
   }
 

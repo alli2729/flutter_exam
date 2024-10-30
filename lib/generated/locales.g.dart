@@ -32,6 +32,14 @@ class LocaleKeys {
       'flutter_exam_register_page_login';
   static const flutter_exam_category_page_category =
       'flutter_exam_category_page_category';
+  static const flutter_exam_add_category_page_addCategory =
+      'flutter_exam_add_category_page_addCategory';
+  static const flutter_exam_add_category_page_title =
+      'flutter_exam_add_category_page_title';
+  static const flutter_exam_title_page_items = 'flutter_exam_title_page_items';
+  static const flutter_exam_title_page_emptyList =
+      'flutter_exam_title_page_emptyList';
+  static const flutter_exam_title_page_money = 'flutter_exam_title_page_money';
 }
 
 class Locales {
@@ -48,6 +56,11 @@ class Locales {
     'flutter_exam_register_page_or': 'or',
     'flutter_exam_register_page_login': 'Login',
     'flutter_exam_category_page_category': 'Category',
+    'flutter_exam_add_category_page_addCategory': 'Add Category',
+    'flutter_exam_add_category_page_title': 'Title',
+    'flutter_exam_title_page_items': 'Items',
+    'flutter_exam_title_page_emptyList': 'List is empty',
+    'flutter_exam_title_page_money': 'T',
   };
   static const fa_IR = {
     'flutter_exam_login_page_login': 'وارد شوید',
@@ -62,5 +75,10 @@ class Locales {
     'flutter_exam_register_page_or': 'یا',
     'flutter_exam_register_page_login': 'وارد شوید',
     'flutter_exam_category_page_category': 'دسته بندی',
+    'flutter_exam_add_category_page_addCategory': 'اضافه کردن دسته بندی',
+    'flutter_exam_add_category_page_title': 'عنوان',
+    'flutter_exam_title_page_items': 'آیتم',
+    'flutter_exam_title_page_emptyList': 'لیست خالی است',
+    'flutter_exam_title_page_money': 'ت',
   };
 }
